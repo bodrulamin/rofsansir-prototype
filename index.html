@@ -148,6 +148,36 @@
             @keyframes caretBlink {
                 50% { opacity: 0; }
             }
+
+            /* ---- hero liveliness: counters, float, drift ---- */
+            [data-count-to] { display: inline-block; }
+            @keyframes floaty {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-9px); }
+            }
+            .float-y  { animation: floaty 5s ease-in-out infinite; }
+            .float-y2 { animation: floaty 6.5s ease-in-out -2.2s infinite; }
+
+            @keyframes blobDrift {
+                0%, 100% { transform: translate(0, 0) scale(1); }
+                50% { transform: translate(26px, -22px) scale(1.08); }
+            }
+            .blob-drift  { animation: blobDrift 18s ease-in-out infinite; }
+            .blob-drift2 { animation: blobDrift 24s ease-in-out infinite reverse; }
+
+            @keyframes countPop {
+                0% { transform: scale(1); }
+                45% { transform: scale(1.3); color: #b97a23; }
+                100% { transform: scale(1); }
+            }
+            .count-pop { animation: countPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+            /* staggered hero entrance */
+            .stagger > .reveal { transition-delay: 0ms; }
+            .stagger > .reveal:nth-child(2) { transition-delay: 110ms; }
+            .stagger > .reveal:nth-child(3) { transition-delay: 220ms; }
+            .stagger > .reveal:nth-child(4) { transition-delay: 330ms; }
+            .stagger > .reveal:nth-child(5) { transition-delay: 440ms; }
         </style>
     </head>
 
@@ -199,18 +229,21 @@
 
         <!-- ============================ HERO ============================ -->
         <section id="home" class="relative overflow-hidden pt-28 pb-12 md:pt-36 md:pb-20">
-            <div class="pointer-events-none absolute -top-32 -right-24 h-[30rem] w-[30rem] rounded-full bg-marigold/20 blur-3xl"></div>
-            <div class="pointer-events-none absolute -bottom-40 -left-32 h-[30rem] w-[30rem] rounded-full bg-plum/10 blur-3xl"></div>
+            <div class="pointer-events-none absolute -top-32 -right-24 h-[30rem] w-[30rem] rounded-full bg-marigold/20 blur-3xl blob-drift"></div>
+            <div class="pointer-events-none absolute -bottom-40 -left-32 h-[30rem] w-[30rem] rounded-full bg-plum/10 blur-3xl blob-drift2"></div>
 
             <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-4 md:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
                 <!-- copy -->
-                <div class="reveal">
-                    <span class="inline-flex items-center gap-2 rounded-full border border-marigold/30 bg-marigold/10 px-4 py-1.5 text-xs font-bold tracking-wider text-marigold-deep uppercase">
-                        <span class="h-2 w-2 rounded-full bg-marigold"></span>
-                        CAIE Examiner · 8+ Years
+                <div class="stagger">
+                    <span class="reveal inline-flex items-center gap-2 rounded-full border border-marigold/30 bg-marigold/10 px-4 py-1.5 text-xs font-bold tracking-wider text-marigold-deep uppercase">
+                        <span class="relative flex h-2 w-2">
+                            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-marigold opacity-75"></span>
+                            <span class="relative inline-flex h-2 w-2 rounded-full bg-marigold"></span>
+                        </span>
+                        CAIE Examiner · <span data-count-to="8" data-count-suffix="+">8+</span> Years
                     </span>
 
-                    <h1 class="font-display mt-5 text-[2.7rem] leading-[1.02] font-bold tracking-tight text-ink text-balance sm:text-6xl lg:text-[4.4rem]">
+                    <h1 class="reveal font-display mt-5 text-[2.7rem] leading-[1.02] font-bold tracking-tight text-ink text-balance sm:text-6xl lg:text-[4.4rem]">
                         Your route to
                         <span class="relative inline-block text-marigold-deep">
                             A*
@@ -219,23 +252,23 @@
                         in O Level Bengali
                     </h1>
 
-                    <p class="mt-5 max-w-xl text-base leading-relaxed text-muted md:text-lg">
+                    <p class="reveal mt-5 max-w-xl text-base leading-relaxed text-muted md:text-lg">
                         English-medium students learn Bengali the clear, exam-focused way, guided by a Cambridge examiner who makes the subject finally feel simple.
                     </p>
 
                     <!-- BULLET CHECKLIST (from the original site) -->
-                    <ul class="mt-7 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+                    <ul class="reveal mt-7 grid gap-x-6 gap-y-3 sm:grid-cols-2">
                         <li class="flex items-center gap-3">
                             <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-marigold/15 text-marigold-deep">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                             </span>
-                            <span class="text-[15px] font-semibold text-ink">8+ Years Experience</span>
+                            <span class="text-[15px] font-semibold text-ink"><span data-count-to="8" data-count-suffix="+">8+</span> Years Experience</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-marigold/15 text-marigold-deep">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                             </span>
-                            <span class="text-[15px] font-semibold text-ink">3000+ Students Mentored</span>
+                            <span class="text-[15px] font-semibold text-ink"><span data-count-to="3000" data-count-suffix="+" data-count-sep="true">3,000+</span> Students Mentored</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-marigold/15 text-marigold-deep">
@@ -247,11 +280,11 @@
                             <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-marigold/15 text-marigold-deep">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                             </span>
-                            <span class="text-[15px] font-semibold text-ink">98% A* &amp; A Success Rate</span>
+                            <span class="text-[15px] font-semibold text-ink"><span data-count-to="98" data-count-suffix="%">98%</span> A* &amp; A Success Rate</span>
                         </li>
                     </ul>
 
-                    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <div class="reveal mt-8 flex flex-col gap-3 sm:flex-row">
                         <a href="#admission" class="group inline-flex items-center justify-center gap-2 rounded-full bg-marigold px-7 py-3.5 text-sm font-bold text-ink shadow-card transition hover:-translate-y-0.5 hover:bg-marigold-soft">
                             Start Learning
                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="transition group-hover:translate-x-0.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -274,24 +307,24 @@
                     </div>
 
                     <!-- floating result chip -->
-                    <div class="absolute -top-4 -left-3 flex items-center gap-3 rounded-2xl border border-ink/5 bg-paper/95 p-3 pr-5 shadow-luxe backdrop-blur md:-left-7">
+                    <div class="float-y absolute -top-4 -left-3 flex items-center gap-3 rounded-2xl border border-ink/5 bg-paper/95 p-3 pr-5 shadow-luxe backdrop-blur md:-left-7">
                         <div class="grid h-11 w-11 place-items-center rounded-xl bg-marigold text-ink">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                         </div>
                         <div>
-                            <p class="font-display text-base font-bold leading-none">98% A* &amp; A</p>
+                            <p class="font-display text-base font-bold leading-none"><span data-count-to="98" data-count-suffix="%">98%</span> A* &amp; A</p>
                             <p class="mt-1 text-[10px] font-bold tracking-widest text-muted uppercase">Success Rate</p>
                         </div>
                     </div>
 
                     <!-- floating student pill -->
-                    <div class="absolute -bottom-5 right-2 flex items-center gap-2 rounded-full border border-ink/5 bg-paper/95 py-1.5 pr-4 pl-1.5 shadow-card backdrop-blur">
+                    <div class="float-y2 absolute -bottom-5 right-2 flex items-center gap-2 rounded-full border border-ink/5 bg-paper/95 py-1.5 pr-4 pl-1.5 shadow-card backdrop-blur">
                         <div class="flex -space-x-2">
                             <img src="assets/students/prioman.jpg" class="h-8 w-8 rounded-full border-2 border-paper object-cover" alt="" />
                             <img src="assets/students/farhan.jpeg" class="h-8 w-8 rounded-full border-2 border-paper object-cover" alt="" />
                             <img src="assets/students/maida.jpg" class="h-8 w-8 rounded-full border-2 border-paper object-cover" alt="" />
                         </div>
-                        <span class="text-xs font-bold text-ink">3,000+ students</span>
+                        <span class="text-xs font-bold text-ink"><span data-count-to="3000" data-count-suffix="+" data-count-sep="true" data-count-live="true">3,000+</span> students</span>
                     </div>
                 </div>
             </div>
@@ -775,6 +808,57 @@
                 { threshold: 0.4 },
             );
             vo.observe(document.getElementById('voices'));
+
+            /* ---------------- Hero: count-up stats + live ticker ---------------- */
+            const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+            function runCount(el) {
+                const to = parseFloat(el.dataset.countTo);
+                const dur = parseInt(el.dataset.countDur || '1600', 10);
+                const prefix = el.dataset.countPrefix || '';
+                const suffix = el.dataset.countSuffix || '';
+                const sep = el.dataset.countSep === 'true';
+                const fmt = (n) => {
+                    let s = String(Math.round(n));
+                    if (sep) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                    return prefix + s + suffix;
+                };
+                let t0 = null;
+                function step(ts) {
+                    if (!t0) t0 = ts;
+                    const p = Math.min((ts - t0) / dur, 1);
+                    el.textContent = fmt(to * easeOutCubic(p));
+                    if (p < 1) requestAnimationFrame(step);
+                    else {
+                        el.textContent = fmt(to);
+                        if (el.dataset.countLive === 'true') startLive(el, to, fmt);
+                    }
+                }
+                requestAnimationFrame(step);
+            }
+            function startLive(el, base, fmt) {
+                let live = base;
+                const tick = () => {
+                    live += 1;
+                    el.textContent = fmt(live);
+                    el.classList.remove('count-pop');
+                    void el.offsetWidth; /* restart animation */
+                    el.classList.add('count-pop');
+                    setTimeout(tick, 4500 + Math.random() * 5000);
+                };
+                setTimeout(tick, 5000);
+            }
+            const countObserver = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((e) => {
+                        if (e.isIntersecting) {
+                            runCount(e.target);
+                            countObserver.unobserve(e.target);
+                        }
+                    });
+                },
+                { threshold: 0.6 },
+            );
+            document.querySelectorAll('[data-count-to]').forEach((el) => countObserver.observe(el));
         </script>
     </body>
 </html>
